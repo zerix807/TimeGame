@@ -3,12 +3,10 @@ using System.Collections;
 
 public class ArmRotation : MonoBehaviour {
 	public bool isEnemy;
-	public bool toFlip;
 	private Transform player;
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform>();
-		toFlip = true;
 	}
 
 	// Update is called once per frame
@@ -25,11 +23,7 @@ public class ArmRotation : MonoBehaviour {
 		difference.Normalize ();
 
 		float rotZ = Mathf.Atan2 (difference.y, difference.x) * Mathf.Rad2Deg;
-
-		if (toFlip) {
-			transform.rotation = Quaternion.Euler (0f, 0f, rotZ);
-		} else {
-			transform.rotation = Quaternion.Euler (0f, 0f, -rotZ);
-		}
+		transform.position = player.position;
+		transform.rotation = Quaternion.Euler (0f, 0f, rotZ);
 	}
 }

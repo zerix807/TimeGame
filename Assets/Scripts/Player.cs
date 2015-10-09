@@ -80,9 +80,6 @@ public class Player : MonoBehaviour {
 
     private float _hurtDistance;
 
-	private ArmRotation _arm;
-	private bool _armFlip;
-
     #endregion
 
     // Use this for initialization
@@ -93,8 +90,6 @@ public class Player : MonoBehaviour {
     void Awake()
     {
         _controller = GetComponent<CharacterController2D>();
-		_arm = GameObject.FindGameObjectWithTag("Arm").GetComponent<ArmRotation>();
-		_armFlip = false;
         //_afterimages = GetComponent<Afterimages>();
     }
 	
@@ -689,10 +684,7 @@ public class Player : MonoBehaviour {
     }
 	
 	private void Flip() {
-		_arm.toFlip = _armFlip;
-		_arm.transform.localScale = new Vector3(-_arm.transform.localScale.x, _arm.transform.localScale.y, _arm.transform.localScale.z);
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-		_armFlip = !_armFlip;
 	}
 
     public void StartJump(ref Vector3 velocity)
