@@ -94,7 +94,7 @@ public class Player : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         // Debug.Log(_controller.collisionState.ToString());
         if (isInvincible)
         {
@@ -171,14 +171,16 @@ public class Player : MonoBehaviour {
                 if (Input.GetAxis("Horizontal") < 0)
                 {
                     _velocity.x = -1 * runSpeed;
-                    if (transform.localScale.x > 0f)
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+					if (transform.localScale.x > 0f){
+						Flip ();
+					}
                 }
                 else if (Input.GetAxis("Horizontal") > 0)
                 {
                     _velocity.x = runSpeed;
-                    if (transform.localScale.x < 0f)
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+					if (transform.localScale.x < 0f) {
+						Flip ();
+					}
                 }
                 else
                 {
@@ -260,7 +262,7 @@ public class Player : MonoBehaviour {
                     
 
                     if (transform.localScale.x > 0f)
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+						Flip ();
 
                     if (_controller.collisionState.left && _controller.velocity.y < 0)
                     {
@@ -304,8 +306,8 @@ public class Player : MonoBehaviour {
                         dashJump = false;
                         _wallJumpState = WallJumpState.OFF;
                     }
-                    if (transform.localScale.x < 0f)
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+					if (transform.localScale.x < 0f)
+						Flip ();
                     if (_controller.collisionState.right && _controller.velocity.y < 0)
                     {
                         state = State.WALLCLINGING;
@@ -393,16 +395,16 @@ public class Player : MonoBehaviour {
                 if (Input.GetAxis("Horizontal") < 0)
                 {
                     _velocity.x = -1 * dashSpeed;
-                    if (transform.localScale.x > 0f)
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+					if (transform.localScale.x > 0f)
+						Flip ();
                     if (releasedDash)
                         state = State.RUNNING;
                 }
                 else if (Input.GetAxis("Horizontal") > 0)
                 {
                     _velocity.x = dashSpeed;
-                    if (transform.localScale.x < 0f)
-                        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+					if (transform.localScale.x < 0f)
+						Flip ();
                     if (releasedDash)
                         state = State.RUNNING;
                 }
@@ -680,7 +682,10 @@ public class Player : MonoBehaviour {
         _controller.move(_velocity);
         _velocity = _controller.velocity;
     }
-
+	
+	private void Flip() {
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
 
     public void StartJump(ref Vector3 velocity)
     {
@@ -708,14 +713,14 @@ public class Player : MonoBehaviour {
         if (Input.GetAxis("Horizontal") > 0)
         {
             _velocity.x = diveHorizontalSpeed;
-            if (transform.localScale.x < 0f)
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			if (transform.localScale.x < 0f)
+				Flip ();
         }
         else if (Input.GetAxis("Horizontal") < 0)
         {
             _velocity.x = -diveHorizontalSpeed;
             if (transform.localScale.x > 0f)
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+				Flip ();
         }
         else
         {
