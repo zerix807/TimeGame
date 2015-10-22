@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/HealthScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TimeController.cs">
     <Files>
       <File FileName="Assets/Scripts/ArmRotation.cs" Line="28" Column="4" />
-      <File FileName="Assets/Scripts/TimeController.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/WeaponScript.cs" Line="21" Column="3" />
-      <File FileName="Assets/Scripts/HealthScript.cs" Line="14" Column="42" />
-      <File FileName="Assets/Scripts/Player.cs" Line="45" Column="41" />
+      <File FileName="Assets/Scripts/TimeController.cs" Line="21" Column="25" />
+      <File FileName="Assets/Scripts/WeaponScript.cs" Line="56" Column="5" />
+      <File FileName="Assets/Scripts/HealthScript.cs" Line="13" Column="2" />
+      <File FileName="Assets/Scripts/Player.cs" Line="449" Column="44" />
       <File FileName="Assets/Scripts/Bullet.cs" Line="6" Column="31" />
       <File FileName="Assets/Scripts/EnemyScript.cs" Line="12" Column="30" />
     </Files>
