@@ -165,6 +165,7 @@ public class Player : MonoBehaviour {
 
                 if (Input.GetButtonDown("Dash"))
                 {
+					Debug.Log("dash");
                     state = State.DASHING;
                     StartDash();
                 }
