@@ -3,24 +3,20 @@ using System.Collections;
 
 public class TimeController : MonoBehaviour {
 
-	private bool isSlowing;
-
-	void Awake () {
-		isSlowing = false;
-	}
-
+	public float timeSlow = 0.05f;
+	public float timeFast = 0.05f;
+	public float speedLimit = 0.01f;
 	// Update is called once per frame
 	void Update () {
 
 		if (!Input.anyKey) {
-			if (Time.timeScale > 0f) {
-				Time.timeScale-=0.3f;
+			if (Time.timeScale > speedLimit + timeSlow) {
+				Time.timeScale-=timeSlow;
 			}
 		} else {
 			if (Time.timeScale <= 1.0f) {
-				Time.timeScale+=0.3f;
+				Time.timeScale+=timeFast;
 			}
 		}
-
 	}
 }
