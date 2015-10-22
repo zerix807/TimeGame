@@ -11,8 +11,7 @@ public enum State
     AIRDASHING = 4,
     DIVING = 5,
     WALLCLINGING = 6,
-    VAIRDASHING = 7,
-    HURT = 8
+    VAIRDASHING = 7
 }
 
 public class Player : MonoBehaviour {
@@ -44,15 +43,7 @@ public class Player : MonoBehaviour {
     public float wallDashJumpDecayRate = 100;
     public float gravity = -40;
     public float terminalVelocity = -12;
-
-    public bool isInvincible = false;
-    public float invincibleTime = 1.5f;
-
-
-
-    public float hurtTime = 1.5f;
-    public float hurtKnockbackSpeed = 2;
-    public float hurtKnockbackTime = 0.5f;
+	
 
     public bool dashJump = false;
     public bool usedDoubleJump = false;
@@ -71,14 +62,7 @@ public class Player : MonoBehaviour {
     private bool _usedVairDash;
     private float _vairDashTimer;
 
-    private float _invincibleTimer;
-
-    private float _hurtTimer;
-    private float _hurtKnockbackTimer;
-
     private WallJumpState _wallJumpState;
-
-    private float _hurtDistance;
 
     #endregion
 
@@ -94,17 +78,8 @@ public class Player : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         // Debug.Log(_controller.collisionState.ToString());
-        if (isInvincible)
-        {
-            _invincibleTimer -= Time.deltaTime;
-            if (_invincibleTimer <= 0)
-            {
-                isInvincible = false;
-            }
-        }
-
 
         if (_controller.isGrounded)
         {
@@ -618,50 +593,6 @@ public class Player : MonoBehaviour {
                 }
 
                 break;
-            case State.HURT:
-                _hurtTimer -= Time.deltaTime;
-                _hurtKnockbackTimer -= Time.deltaTime;
-
-                Quaternion rotate = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + (1000 * Time.deltaTime)));
-                
-
-                transform.rotation = rotate;
-
-                if (_hurtTimer <= 0)
-                {
-                    if (_controller.isGrounded)
-                    {
-                        if (Input.GetAxis("Horizontal") == 0)
-                        {
-                            state = State.IDLE;
-                            StopHurt();
-                            break;
-                        }
-                        else
-                        {
-                            state = State.RUNNING;
-                            StopHurt();
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        state = State.JUMPING;
-                        StopHurt();
-                        break;
-                    }
-                }
-
-                if (_hurtKnockbackTimer > 0)
-                {
-                    _velocity.x = _hurtDistance;
-                }
-                else
-                {
-                    _velocity.x = 0;
-                }
-
-                break;
             default:
                 break;
 
@@ -767,35 +698,9 @@ public class Player : MonoBehaviour {
         _velocity.x = 0;
         _velocity.y = 0;
     }
+	
 
-    public void StartHurt()
-    {
-        if (!isInvincible)
-        {
-            state = State.HURT;
-            _disableGravity = false;
-            _hurtTimer = hurtTime;
-            isInvincible = true;
-            _hurtKnockbackTimer = hurtKnockbackTime;
-            _invincibleTimer = invincibleTime;
+	public void disable() {
 
-            _velocity.y = 0;
-            _velocity.x = 0;
-
-            if (transform.localScale.x > 0)
-            {
-                _hurtDistance = -hurtKnockbackSpeed;
-            }
-            else if (transform.localScale.x < 0)
-            {
-                _hurtDistance = hurtKnockbackSpeed;
-            }
-        }
-    }
-
-    public void StopHurt()
-    {
-        Quaternion rotate = Quaternion.Euler(new Vector3(0, 0, 0));
-        transform.rotation = rotate;
-    }
+	}
 }

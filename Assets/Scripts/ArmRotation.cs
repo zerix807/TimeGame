@@ -10,7 +10,7 @@ public class ArmRotation : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void LateUpdate () {
 
 		Vector3 difference;
 
@@ -23,7 +23,9 @@ public class ArmRotation : MonoBehaviour {
 		difference.Normalize ();
 
 		float rotZ = Mathf.Atan2 (difference.y, difference.x) * Mathf.Rad2Deg;
-		transform.position = player.position;
+		if (!isEnemy) {
+			transform.position = player.position;
+		}
 		transform.rotation = Quaternion.Euler (0f, 0f, rotZ);
 	}
 }
