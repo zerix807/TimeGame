@@ -24,6 +24,11 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
+# Inverse ignore some stuff
+!/Assets/
+!/ProjectSettings/
+!.gitignore
+
 .DS_Store
 .AppleDouble
 .LSOverride
