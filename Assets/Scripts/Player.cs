@@ -24,7 +24,8 @@ public class Player : MonoBehaviour {
     }
 
     // public PlayerState state;
-
+	
+	public GameObject gameCamera;
     public State state;
 
     public float runSpeed = 7;
@@ -64,11 +65,14 @@ public class Player : MonoBehaviour {
 
     private WallJumpState _wallJumpState;
 
+	Animator _anim;
+
     #endregion
 
     // Use this for initialization
     void Start () {
         _velocity = _controller.velocity;
+		_anim = GetComponent<Animator>();
 	}
 
     void Awake()
@@ -80,6 +84,8 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // Debug.Log(_controller.collisionState.ToString());
+
+		_anim.SetFloat ("hSpeed", Mathf.Abs(Input.GetAxis("Horizontal")));
 
         if (_controller.isGrounded)
         {
@@ -702,6 +708,9 @@ public class Player : MonoBehaviour {
 	
 
 	public void disable() {
-
+		enabled = false;
+		gameObject.GetComponentInChildren<ArmRotation> ().enabled = false;
+		gameObject.GetComponentInChildren<WeaponScript> ().enabled = false;
+		gameObject.AddComponent<GameOverScript>();
 	}
 }

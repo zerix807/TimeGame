@@ -47,6 +47,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+Library/*
+
+Temp/*
+
 Library/assetDatabase3
 
 Library/assetDatabase3
@@ -66,3 +70,19 @@ Temp/__EditModeScene
 Library/expandedItems
 
 Library/assetDatabase3
+Library/AssetServerCacheV3
+Library/metadata/00/00000000000000001000000000000000
+Library/AssetServerCacheV3
+*.dwlt
+Library/InspectorExpandedItems.asset
+*.info
+Library/metadata/00/00000000000000003000000000000000
+*.info
+Library/metadata/00/00000000000000005000000000000000
+Library/metadata/00/00000000000000005000000000000000
+*.userprefs
+*.sln
+ProjectSettings/ProjectVersion.txt
+ProjectSettings/EditorBuildSettings.asset
+*.stamp
+Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
