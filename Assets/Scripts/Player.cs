@@ -709,8 +709,8 @@ public class Player : MonoBehaviour {
 
 	public void disable() {
 		enabled = false;
-		gameObject.GetComponentInChildren<ArmRotation> ().enabled = false;
-		gameObject.GetComponentInChildren<WeaponScript> ().enabled = false;
+		transform.parent.GetComponentInChildren<ArmRotation> ().enabled = false;
+		transform.parent.GetComponentInChildren<WeaponScript> ().enabled = false;
 		gameObject.AddComponent<GameOverScript>();
 	}
 }

@@ -31,7 +31,7 @@ public class WeaponScript : MonoBehaviour {
 			timeToFire -= Time.deltaTime;
 		}
 
-		if (player != null && player.tag == "Player") {
+		if (player != null && transform.tag == "Arm") {
 			if (fireRate == 0) {
 				if (Input.GetButtonDown ("Fire1")) {
 					Shoot (false);
@@ -45,6 +45,7 @@ public class WeaponScript : MonoBehaviour {
 	}
 
 	public void Shoot (bool isEnemy) {
+
 	if (Time.time >= timeToSpawnEffect) {
 
 			var shotTransform = Instantiate(Shot, firePoint.position, firePoint.rotation) as Transform;
