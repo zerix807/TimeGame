@@ -1,4 +1,4 @@
-﻿#define DEBUG_CC2D_RAYS
+#define DEBUG_CC2D_RAYS
 using UnityEngine;
 using System;
 using System.Collections.Generic;
@@ -148,7 +148,10 @@ public class CharacterController2D : MonoBehaviour
 	public bool isGrounded { get { return collisionState.below; } }
 
 	const float kSkinWidthFloatFudgeFactor = 0.001f;
-
+		
+	public Collider2D ground;
+	public Vector2 landingPoint;
+	
 	#endregion
 
 
@@ -273,8 +276,9 @@ public class CharacterController2D : MonoBehaviour
 			velocity = deltaMovement / Time.deltaTime;
 
 		// set our becameGrounded state based on the previous and current collision state
-		if( !collisionState.wasGroundedLastFrame && collisionState.below )
+		if (!collisionState.wasGroundedLastFrame && collisionState.below) {
 			collisionState.becameGroundedThisFrame = true;
+		}
 
 		// if we are going up a slope we artificially set a y velocity so we need to zero it out here
 		if( _isGoingUpSlope )
@@ -497,6 +501,10 @@ public class CharacterController2D : MonoBehaviour
 				{
 					deltaMovement.y -= _skinWidth;
 					collisionState.above = true;
+					if (ground != _raycastHit.collider) { 
+						ground = _raycastHit.collider; 
+						landingPoint = _raycastHit.point; 
+					}
 				}
 				else
 				{

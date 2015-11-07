@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
     public float airDashTime = 0.4f;
     public float vairDashTime = 0.3f;
     public float vairDashSpeed = -7f;
-    public float diveVerticalSpeed = 15;
+    public float diveVerticalSpeed = -15f;
     public float diveHorizontalSpeed = 3;
     public float wallSlideRate = -10;
     public float wallJumpX = 5;
@@ -85,10 +85,19 @@ public class Player : MonoBehaviour {
 	void Update () {
         // Debug.Log(_controller.collisionState.ToString());
 
+
+
 		_anim.SetFloat ("hSpeed", Mathf.Abs(Input.GetAxis("Horizontal")));
 
         if (_controller.isGrounded)
         {
+			if (_controller.ground != null && _controller.ground.tag == "MovingPlatform") {
+				this.transform.parent = _controller.ground.transform;
+			} else {
+				if (this.transform.parent != null) {
+					transform.parent = null;
+				}
+			}
             _usedAirDash = false;
             usedDoubleJump = false;
             _usedVairDash = false;
