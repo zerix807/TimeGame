@@ -25,9 +25,7 @@ public class HealthScript : MonoBehaviour {
 				if (hp <= 0) {
 					if (GetComponent<Player>() != null)
 					{
-						//GetComponent<Player>().disable();
-						Time.timeScale = 0f;
-						gameObject.AddComponent<GameOverScript>();
+						GetComponent<Player>().disable();
 					} else {
 						Destroy (gameObject);
 					}
