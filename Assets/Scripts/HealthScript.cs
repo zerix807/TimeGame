@@ -25,12 +25,16 @@ public class HealthScript : MonoBehaviour {
 				if (hp <= 0) {
 					if (GetComponent<Player>() != null)
 					{
-						GetComponent<Player>().disable();
+						//GetComponent<Player>().disable();
+						gameObject.AddComponent<GameOverScript>();
 					} else {
 						Destroy (gameObject);
 					}
 				}
 			}
+		} else if (col.tag == "HP") {
+			hp+=2;
+			Destroy(col.gameObject);
 		}
 	}
 }
